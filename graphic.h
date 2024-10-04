@@ -2,7 +2,7 @@
 #include<cmath>
 #include<iostream>
 #include<cstring>
-#include <unistd.h>
+#include<unistd.h>
 using namespace std;
 
 void drawLine(int x1, int y1, int x2, int y2);
@@ -13,7 +13,6 @@ void drawLine(int x1, int y1, int x2, int y2){
     if(x1>x2){
         scambiaInt(&x1, &x2);
         scambiaInt(&y1, &y2);
-        cout<<"scambiati\n";
     }
     int h, l;
     int direction;
@@ -48,10 +47,13 @@ void drawLine(int x1, int y1, int x2, int y2){
     }
     if(direction==1){
         for(int i=0; i<h; i++){
-            if(y1<y2)
-                setCursor(int(((i+y1)-b))/m, i+y1);
+            if(isinf(m))
+                setCursor(x1, i+y1);
             else
-                setCursor(int(((-i+y1)-b))/m, -i+y1);
+                if(y1<y2)
+                    setCursor(int(((i+y1)-b)/m), i+y1);
+                else
+                    setCursor(int(((-i+y1)-b)/m), -i+y1);
 
             cout<<"#";
         }
