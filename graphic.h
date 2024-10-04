@@ -16,8 +16,8 @@ void drawLine(int x1, int y1, int x2, int y2){
     }
     int h, l;
     int direction;
-    float m = float((y2-y1))/float((x2-x1)); //SE POSITIVA, VA SOTTO, SE NEGATIVA, VA SOPRA
-    float b = y1 - (m*x1); //b
+    float m = float((y2-y1))/float((x2-x1)); //SE POSITIVA, VA SOTTO, SE NEGATIVA, VA SOPRA (curvatura della linea)
+    float b = y1 - (m*x1); //fattore b per il calcolo dei vari punti
     l = x2-x1+1;
     if(m<=0){
         if(m<-1) 
@@ -39,6 +39,7 @@ void drawLine(int x1, int y1, int x2, int y2){
     //x = (y-b) / m
     //cout<<direction<<"\n";
 
+    //zona di calcolo 
     if(direction==2){
         for(int i=0; i<l; i++){
             setCursor(i+x1, int((m*(i+x1)+b)));
@@ -47,14 +48,17 @@ void drawLine(int x1, int y1, int x2, int y2){
     }
     if(direction==1){
         for(int i=0; i<h; i++){
-            if(isinf(m))
-                setCursor(x1, i+y1);
-            else
-                if(y1<y2)
-                    setCursor(int(((i+y1)-b)/m), i+y1);
-                else
-                    setCursor(int(((-i+y1)-b)/m), -i+y1);
-
+                if(y1<y2){
+                    if(isinf(m))
+                        setCursor(x1, i+y1);
+                    else
+                        setCursor(int(((i+y1)-b)/m), i+y1);
+                }else{
+                    if(isinf(m))
+                        setCursor(x1, -i+y1);
+                    else
+                        setCursor(int(((-i+y1)-b)/m), -i+y1);
+                }
             cout<<"#";
         }
     }

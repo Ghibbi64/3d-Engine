@@ -7,8 +7,8 @@
 using namespace std;
 
 const int RADIUS = 30;      // Radius of the circle
-const int CENTER_X = 50;   // X coordinate of the center
-const int CENTER_Y = 35;   // Y coordinate of the center
+const int CENTER_X = 187;   // X coordinate of the center
+const int CENTER_Y = 45;   // Y coordinate of the center
 int msleep(long msec);
 
 int main(){
@@ -18,10 +18,10 @@ int main(){
     int x=0, y=0;
     float angle=0;
     while(true){
-        if(angle!=360)
-            angle += 0.5;
-        else
+        angle += 0.1;
+        if(angle==360)
             angle = 0;
+            
         x = CENTER_X + static_cast<int>(RADIUS * cos(angle));
         y = CENTER_Y + static_cast<int>(RADIUS * sin(angle));
 
