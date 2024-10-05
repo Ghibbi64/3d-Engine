@@ -3,6 +3,7 @@
 #include<iostream>
 #include<cstring>
 #include<unistd.h>
+#include"basic.h"
 using namespace std;
 
 char frameBuffer[70][230];
@@ -14,7 +15,6 @@ void charsToBuffer(char* text, int x, int y);
 void drawBuffer();
 void clearBuffer();
 void setCursor(int x, int y);
-void scambiaInt(int* a, int* b);
 
 void drawLine(int x1, int y1, int x2, int y2){
     if(x1>x2){
@@ -68,7 +68,10 @@ void drawLine(int x1, int y1, int x2, int y2){
 }
 
 void charsToBuffer(char* text, int x, int y){
-
+    int count;
+    for(count=0; text[count]!='\0'; count++){
+        frameBuffer[y][x+count] = text[count];
+    }
 }
 
 void drawBuffer(){
@@ -94,9 +97,3 @@ void setCursor(int x, int y){
     printf("%c[%d;%df",0x1B,y,x);
 }
 
-void scambiaInt(int* a, int* b){
-    int temp;
-    temp = *a;
-    *a = *b;
-    *b = temp;
-}
