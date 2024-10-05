@@ -26,7 +26,8 @@ int main(){
         y = CENTER_Y + static_cast<int>(RADIUS * sin(angle));
 
         drawLine(CENTER_X, CENTER_Y, x, y);
-        
+        drawBuffer();
+        clearBuffer();
         getchar();
         system("tput reset");
     }
